@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="description" content="Panipuri House offers premium bulk catering services for weddings, birthdays, corporate events, and special occasions with authentic panipuri taste.">
+    <meta name="keywords" content="Panipuri, Street Food, Bulk Catering, Wedding Catering, Party Catering, Premium Panipuri">
+    <meta name="author" content="Panipuri House">
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="Panipuri House - Premium Event Catering">
+    <meta property="og:description" content="Experience the authentic taste of Panipuri at your events. Bulk orders for weddings, parties, and corporate events.">
+    <meta property="og:image" content="https://i.ibb.co/Q7QKqbh4/panipuri-img.png">
+    <meta property="og:url" content="https://panipuriarwal.netlify.app/">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panipuri House - Premium Event Catering</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <style>
         * {
             margin: 0;
@@ -48,13 +58,35 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Header */
+        /* ===== TOP BANNER (NEW) ===== */
+        .top-banner {
+            width: 100%;
+            background: #ffffff;
+            line-height: 0;          /* removes extra gap below image */
+            font-size: 0;
+            position: relative;
+            z-index: 1001;            /* stays above animated bg but below sticky header if needed */
+        }
+        .top-banner a {
+            display: block;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .top-banner img {
+            width: 100%;
+            height: auto;
+            display: block;
+            max-width: 100%;
+            border: none;
+        }
+
+        /* Header - changed from fixed to sticky */
         header {
             background: rgba(255, 255, 255, 0.95);
             padding: 20px 0;
-            position: fixed;
-            width: 100%;
+            position: sticky;
             top: 0;
+            width: 100%;
             z-index: 1000;
             box-shadow: 0 5px 20px rgba(255, 107, 0, 0.1);
             backdrop-filter: blur(10px);
@@ -150,23 +182,23 @@
             width: 70%;
         }
 
-        /* Hero Section */
+        /* Hero Section - removed fixed-header margin */
         .hero {
-            margin-top: 100px;
+            margin-top: 0;            /* was 100px, now banner + sticky handle spacing */
             padding: 80px 20px;
             text-align: center;
             position: relative;
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .hero-content {
             max-width: 800px;
             margin: 0 auto;
             animation: fadeInUp 1s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
         }
 
         .hero h2 {
@@ -490,7 +522,7 @@
             font-size: 1.1rem;
         }
 
-        /* Contact Section */
+        /* Contact Section (if present, but hidden in your code; leaving for completeness) */
         .contact {
             padding: 100px 20px;
             background: white;
@@ -702,7 +734,14 @@
     <!-- Animated Background -->
     <div class="animated-bg"></div>
 
-    <!-- Header with Navigation -->
+    <!-- ===== NEW TOP BANNER (OFFER) ===== -->
+    <div class="top-banner">
+        <a href="https://panipuribooking.netlify.app/" target="_blank" rel="noopener noreferrer">
+            <img src="https://vague-scarlet-6bltipgrnh.edgeone.app/Untitled%20(7).png" alt="Special offer - Book your panipuri catering now!">
+        </a>
+    </div>
+
+    <!-- Header with Navigation (now sticky, not fixed) -->
     <header>
         <div class="header-container">
             <div class="logo">
@@ -714,7 +753,6 @@
                     <li><a href="#home" class="active">Home</a></li>
                     <li><a href="#products">Product</a></li>
                     <li><a href="#about">About</a></li>
-                  
                 </ul>
             </nav>
         </div>
@@ -798,8 +836,9 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact Section (originally empty, kept for consistency) -->
     
+
     <!-- Footer -->
     <footer>
         <div class="footer-content">
@@ -882,7 +921,7 @@
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
                         window.scrollTo({
-                            top: targetElement.offsetTop - 80,
+                            top: targetElement.offsetTop - 80,  // keep header height offset
                             behavior: 'smooth'
                         });
                         
@@ -927,6 +966,21 @@
                 };
             }
         });
+
+        // Dynamic Title
+        document.title = "Panipuri House - Premium Bulk Event Catering";
+
+        // Dynamic Meta Description
+        let metaDesc = document.createElement('meta');
+        metaDesc.name = "description";
+        metaDesc.content = "Panipuri House offers premium bulk catering for weddings, birthdays, and corporate events with authentic street-style panipuri.";
+        document.getElementsByTagName('head')[0].appendChild(metaDesc);
+
+        // Dynamic Keywords (optional)
+        let metaKeywords = document.createElement('meta');
+        metaKeywords.name = "keywords";
+        metaKeywords.content = "Panipuri, Street Food, Bulk Catering, Wedding Catering, Party Catering, Premium Panipuri";
+        document.getElementsByTagName('head')[0].appendChild(metaKeywords);
     </script>
 </body>
 </html>
