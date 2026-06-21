@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panipuri House — Premium Order Experience</title>
+    <meta name="description" content="Order authentic panipuri in bulk for your events. Premium quality, fresh delivery, and seamless booking experience.">
+    <meta name="theme-color" content="#0a0a0a">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-deep: #050505;
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #161616;
+            --bg-card-hover: #1c1c1c;
+            --bg-input: #0d0d0d;
+            --orange: #ff6b00;
+            --orange-bright: #ff8c00;
+            --orange-deep: #e85d00;
+            --orange-glow: rgba(255, 107, 0, 0.35);
+            --gold: #c9a84c;
+            --gold-light: #d4b860;
+            --gold-pale: #e0cc8a;
+            --white: #ffffff;
+            --white-soft: #f5f5f5;
+            --gray-100: #eeeeee;
+            --gray-200: #cccccc;
+            --gray-300: #aaaaaa;
+            --gray-400: #888888;
+            --gray-500: #666666;
+            --gray-600: #444444;
+            --gray-700: #222222;
+            --gray-800: #151515;
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-medium: rgba(255, 255, 255, 0.10);
+            --border-gold: rgba(201, 168, 76, 0.3);
+            --border-orange: rgba(255, 107, 0, 0.3);
+            --glass-bg: rgba(18, 18, 18, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.6);
+            --shadow-orange: 0 8px 35px rgba(255, 107, 0, 0.25);
+            --shadow-gold: 0 8px 35px rgba(201, 168, 76, 0.18);
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 18px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+            --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --transition-fast: 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+            --transition-smooth: 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+            --transition-bounce: 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --transition-spring: 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+            --max-width: 1100px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-deep);
+            color: var(--white-soft);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Noise Overlay */
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 200px 200px;
+        }
+
+        /* Floating Orbs */
+        .bg-orbs {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.22;
+            will-change: transform;
+        }
+        .bg-orb.orb-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 107, 0, 0.55) 0%, transparent 70%);
+            top: -12%;
+            right: -8%;
+            animation: orbFloat1 16s ease-in-out infinite;
+        }
+        .bg-orb.orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(201, 168, 76, 0.45) 0%, transparent 70%);
+            bottom: -10%;
+            left: -6%;
+            animation: orbFloat2 19s ease-in-out infinite;
+        }
+        .bg-orb.orb-3 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(255, 140, 0, 0.4) 0%, transparent 70%);
+            top: 45%;
+            left: 55%;
+            animation: orbFloat3 17s ease-in-out infinite;
+        }
+        @keyframes orbFloat1 {
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+            33% {
+                transform: translate(-50px, 35px);
+            }
+            66% {
+                transform: translate(25px, -25px);
+            }
+        }
+        @keyframes orbFloat2 {
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+            33% {
+                transform: translate(40px, -30px);
+            }
+            66% {
+                transform: translate(-30px, 20px);
+            }
+        }
+        @keyframes orbFloat3 {
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(-35px, -40px);
+            }
+        }
+
+        /* Header */
+        .site-header {
+            text-align: center;
+            padding: 50px 24px 40px;
+            position: relative;
+            z-index: 2;
+        }
+        .header-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 12px;
+            animation: fadeInUp 0.7s ease-out both;
+        }
+        .logo-icon-wrap {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--orange), var(--orange-deep));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 6px 25px rgba(255, 107, 0, 0.35);
+            animation: logoPulse 3s ease-in-out infinite;
+        }
+        @keyframes logoPulse {
+            0%,
+            100% {
+                box-shadow: 0 6px 25px rgba(255, 107, 0, 0.35);
+            }
+            50% {
+                box-shadow: 0 8px 40px rgba(255, 107, 0, 0.55);
+            }
+        }
+        .header-title {
+            font-family: var(--font-heading);
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--white);
+            letter-spacing: -0.5px;
+            animation: fadeInUp 0.7s ease-out 0.1s both;
+        }
+        .header-title .accent {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold-pale));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header-tagline {
+            font-family: var(--font-heading);
+            font-style: italic;
+            font-size: 1.15rem;
+            color: var(--gray-400);
+            letter-spacing: 0.5px;
+            animation: fadeInUp 0.7s ease-out 0.2s both;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px 60px;
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 28px;
+            align-items: start;
+        }
+
+        /* Glass Card Base */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 50% 0%, rgba(255, 107, 0, 0.04) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        /* Form Card */
+        .form-card {
+            padding: 36px 32px;
+            position: relative;
+            z-index: 1;
+        }
+        .form-card .section-title {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 6px;
+            letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .form-card .section-title .icon {
+            font-size: 1.3rem;
+        }
+        .form-card .section-subtitle {
+            font-size: 0.85rem;
+            color: var(--gray-400);
+            margin-bottom: 28px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        /* Messages */
+        .error-message {
+            color: #ff5252;
+            background: rgba(255, 82, 82, 0.08);
+            padding: 14px 18px;
+            border-radius: var(--radius-md);
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 82, 82, 0.25);
+            display: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            animation: shakeX 0.4s ease;
+        }
+        @keyframes shakeX {
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+            20% {
+                transform: translateX(-6px);
+            }
+            40% {
+                transform: translateX(6px);
+            }
+            60% {
+                transform: translateX(-4px);
+            }
+            80% {
+                transform: translateX(4px);
+            }
+        }
+        .success-message {
+            color: #4caf50;
+            background: rgba(76, 175, 80, 0.08);
+            padding: 14px 18px;
+            border-radius: var(--radius-md);
+            margin-bottom: 20px;
+            border: 1px solid rgba(76, 175, 80, 0.25);
+            display: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        /* Form Groups */
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: 600;
+            color: var(--gray-200);
+            font-size: 0.88rem;
+            letter-spacing: 0.2px;
+            transition: color var(--transition-fast);
+        }
+        .form-group label .label-icon {
+            margin-right: 6px;
+            opacity: 0.7;
+        }
+        .input-wrapper {
+            position: relative;
+        }
+        .input-wrapper .input-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-500);
+            font-size: 0.9rem;
+            pointer-events: none;
+            transition: color var(--transition-fast);
+            z-index: 2;
+        }
+        .input-wrapper .input-icon.textarea-icon {
+            top: 16px;
+            transform: none;
+        }
+        .input-wrapper input,
+        .input-wrapper textarea,
+        .input-wrapper select {
+            width: 100%;
+            padding: 13px 16px 13px 42px;
+            border: 2px solid var(--border-medium);
+            border-radius: var(--radius-md);
+            font-size: 15px;
+            font-family: var(--font-body);
+            transition: all var(--transition-smooth);
+            background: var(--bg-input);
+            color: var(--white);
+            outline: none;
+            letter-spacing: 0.2px;
+        }
+        .input-wrapper input.no-icon,
+        .input-wrapper textarea.no-icon,
+        .input-wrapper select.no-icon {
+            padding-left: 16px;
+        }
+        .input-wrapper textarea {
+            padding-top: 14px;
+            padding-left: 42px;
+            min-height: 90px;
+            resize: vertical;
+            line-height: 1.5;
+        }
+        .input-wrapper input:focus,
+        .input-wrapper textarea:focus,
+        .input-wrapper select:focus {
+            border-color: var(--orange);
+            box-shadow: 0 0 0 4px rgba(255, 107, 0, 0.1), 0 0 30px rgba(255, 107, 0, 0.06);
+            background: #111111;
+        }
+        .input-wrapper input:focus+.input-icon,
+        .input-wrapper textarea:focus+.input-icon,
+        .input-wrapper select:focus~.input-icon {
+            color: var(--orange);
+        }
+        .input-wrapper input:hover,
+        .input-wrapper textarea:hover,
+        .input-wrapper select:hover {
+            border-color: var(--border-orange);
+        }
+        .input-wrapper select {
+            appearance: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 40px;
+        }
+        .calc-note {
+            font-size: 0.78rem;
+            color: var(--gray-500);
+            margin-top: 6px;
+            font-style: italic;
+            letter-spacing: 0.2px;
+        }
+        .form-row {
+            display: flex;
+            gap: 18px;
+        }
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        /* Price Display */
+        .price-display {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 13px 16px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-subtle);
+            font-weight: 700;
+            color: var(--white);
+            font-size: 1.05rem;
+            letter-spacing: 0.3px;
+            transition: all var(--transition-smooth);
+            min-height: 46px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .price-display .price-icon {
+            color: var(--gold-light);
+            font-size: 0.85rem;
+        }
+        .price-display.highlight-orange {
+            border-color: var(--border-orange);
+            background: rgba(255, 107, 0, 0.05);
+            color: var(--orange-bright);
+        }
+        .price-display.highlight-gold {
+            border-color: var(--border-gold);
+            background: rgba(201, 168, 76, 0.04);
+            color: var(--gold-light);
+        }
+
+        /* Coupon Row */
+        .coupon-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .coupon-row input {
+            flex: 2;
+        }
+        .coupon-row button {
+            flex: 0 0 auto;
+        }
+        #couponMessage {
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-top: 6px;
+            letter-spacing: 0.2px;
+            transition: all var(--transition-smooth);
+            min-height: 20px;
+        }
+
+        /* Buttons */
+        .btn {
+            background: linear-gradient(135deg, var(--orange), var(--orange-deep));
+            color: #fff;
+            border: none;
+            padding: 15px 28px;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 700;
+            width: 100%;
+            transition: all var(--transition-bounce);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.4px;
+            box-shadow: 0 6px 24px rgba(255, 107, 0, 0.3);
+            border: 2px solid transparent;
+            font-family: var(--font-body);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 107, 0, 0.45);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .btn:hover::after {
+            transform: translateX(100%);
+        }
+        .btn:active {
+            transform: translateY(-1px) scale(0.97);
+            box-shadow: 0 4px 16px rgba(255, 107, 0, 0.3);
+        }
+        .btn:disabled {
+            background: var(--gray-600);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            border-color: transparent;
+            opacity: 0.7;
+        }
+        .btn:disabled::after {
+            display: none;
+        }
+        .btn.small-btn {
+            width: auto;
+            padding: 13px 22px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .btn-submit {
+            margin-top: 8px;
+            font-size: 1.05rem;
+            padding: 17px 28px;
+        }
+        #btnLoading {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2.5px solid rgba(255, 255, 255, 0.35);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 0.8s linear infinite;
+            flex-shrink: 0;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Sidebar Summary Card */
+        .summary-sidebar {
+            position: sticky;
+            top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .summary-card {
+            padding: 28px 24px;
+            position: relative;
+            z-index: 1;
+        }
+        .summary-card .summary-title {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 18px;
+            letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-subtle);
+            font-size: 0.9rem;
+            color: var(--gray-300);
+        }
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+        .summary-row .val {
+            font-weight: 700;
+            color: var(--white);
+            font-size: 0.95rem;
+            transition: all var(--transition-fast);
+        }
+        .summary-row .val.gold {
+            color: var(--gold-light);
+        }
+        .summary-row .val.orange {
+            color: var(--orange-bright);
+        }
+        .summary-row.highlight-row {
+            background: rgba(255, 107, 0, 0.04);
+            margin: 6px -12px;
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            border: 1px solid var(--border-orange);
+        }
+        .summary-row.highlight-row .val {
+            font-size: 1.1rem;
+            color: var(--orange-bright);
+        }
+        .summary-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            background: rgba(76, 175, 80, 0.12);
+            color: #4caf50;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            animation: fadeInUp 0.4s ease-out;
+        }
+        .summary-badge.error-badge {
+            background: rgba(255, 82, 82, 0.1);
+            color: #ff5252;
+            border-color: rgba(255, 82, 82, 0.3);
+        }
+
+        /* Coupon Card */
+        .coupon-card {
+            padding: 22px 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .coupon-card .coupon-title {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 12px;
+            letter-spacing: -0.2px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .coupon-hint {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            margin-top: 8px;
+            letter-spacing: 0.3px;
+        }
+        .coupon-hint code {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            color: var(--gold-light);
+            letter-spacing: 0.5px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        .modal.active {
+            display: flex;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .modal-content {
+            background: var(--bg-card);
+            padding: 44px 36px;
+            border-radius: var(--radius-xl);
+            text-align: center;
+            max-width: 480px;
+            width: 92%;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7);
+            animation: modalSlideUp 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid var(--border-gold);
+            position: relative;
+            overflow: visible;
+        }
+        @keyframes modalSlideUp {
+            from {
+                transform: translateY(60px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .modal-icon-check {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #fff;
+            margin: 0 auto 20px;
+            box-shadow: 0 12px 35px rgba(76, 175, 80, 0.4);
+            animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+        }
+        @keyframes popIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        .modal h3 {
+            font-family: var(--font-heading);
+            color: var(--white);
+            margin-bottom: 12px;
+            font-size: 1.6rem;
+            letter-spacing: -0.3px;
+        }
+        .modal p {
+            color: var(--gray-300);
+            margin-bottom: 18px;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        .modal p strong {
+            color: var(--gold-light);
+        }
+        .close-btn {
+            background: linear-gradient(135deg, var(--orange), var(--orange-deep));
+            color: #fff;
+            border: none;
+            padding: 13px 34px;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all var(--transition-bounce);
+            letter-spacing: 0.3px;
+            box-shadow: 0 6px 20px rgba(255, 107, 0, 0.3);
+            font-family: var(--font-body);
+        }
+        .close-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 107, 0, 0.45);
+        }
+
+        /* Confetti Canvas */
+        #confettiCanvas {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 10001;
+        }
+
+        /* Footer */
+        .site-footer {
+            text-align: center;
+            padding: 30px 24px;
+            position: relative;
+            z-index: 2;
+            border-top: 1px solid var(--border-subtle);
+            color: var(--gray-500);
+            font-size: 0.85rem;
+            letter-spacing: 0.3px;
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            .summary-sidebar {
+                position: static;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 18px;
+            }
+            .summary-sidebar .glass-card {
+                height: fit-content;
+            }
+        }
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            .header-title {
+                font-size: 1.8rem;
+            }
+            .header-tagline {
+                font-size: 0.95rem;
+            }
+            .main-container {
+                padding: 0 12px 40px;
+            }
+            .form-card {
+                padding: 24px 18px;
+            }
+            .summary-sidebar {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+            .coupon-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .coupon-row button {
+                width: 100%;
+            }
+            .btn.small-btn {
+                width: 100%;
+            }
+            .modal-content {
+                padding: 30px 20px;
+            }
+            .modal h3 {
+                font-size: 1.3rem;
+            }
+            .input-wrapper input,
+            .input-wrapper textarea,
+            .input-wrapper select {
+                font-size: 14px;
+                padding: 12px 14px 12px 38px;
+            }
+        }
+        @media (max-width: 480px) {
+            .header-title {
+                font-size: 1.5rem;
+            }
+            .logo-icon-wrap {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+                border-radius: 10px;
+            }
+            .form-card .section-title {
+                font-size: 1.3rem;
+            }
+            .btn-submit {
+                font-size: 0.95rem;
+                padding: 14px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="noise-overlay" aria-hidden="true"></div>
+    <div class="bg-orbs" aria-hidden="true">
+        <div class="bg-orb orb-1"></div>
+        <div class="bg-orb orb-2"></div>
+        <div class="bg-orb orb-3"></div>
+    </div>
+    <canvas id="confettiCanvas" aria-hidden="true"></canvas>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-logo">
+            <div class="logo-icon-wrap">🍴</div>
+            <h1 class="header-title">Panipuri <span class="accent">House</span></h1>
+        </div>
+        <p class="header-tagline">Delicious &amp; Fresh Panipuri — Delivered to Your Doorstep</p>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="main-container">
+
+        <!-- Form Column -->
+        <div class="glass-card form-card reveal" id="formCard">
+            <div class="section-title">
+                <span class="icon">🥡</span> Place Your Order
+            </div>
+            <p class="section-subtitle">Fill in the details below and we'll handle the rest.</p>
+
+            <div id="errorMessage" class="error-message"></div>
+            <div id="successMessage" class="success-message"></div>
+
+            <form id="orderForm" novalidate>
+                <!-- Customer Name -->
+                <div class="form-group">
+                    <label for="customerName"><span class="label-icon">👤</span> Customer Name</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="customerName" name="customerName" required placeholder="Enter your full name">
+                        <span class="input-icon"><i class="fas fa-user"></i></span>
+                    </div>
+                </div>
+
+                <!-- Phone Number -->
+                <div class="form-group">
+                    <label for="phoneNumber"><span class="label-icon">📞</span> Phone Number</label>
+                    <div class="input-wrapper">
+                        <input type="tel" id="phoneNumber" name="phoneNumber" required placeholder="Enter your 10-digit phone number" pattern="[0-9]{10}">
+                        <span class="input-icon"><i class="fas fa-phone"></i></span>
+                    </div>
+                </div>
+
+                <!-- Delivery Address -->
+                <div class="form-group">
+                    <label for="deliveryAddress"><span class="label-icon">🏠</span> Delivery Address</label>
+                    <div class="input-wrapper">
+                        <textarea id="deliveryAddress" name="deliveryAddress" rows="3" required placeholder="Enter your complete delivery address"></textarea>
+                        <span class="input-icon textarea-icon"><i class="fas fa-map-marker-alt"></i></span>
+                    </div>
+                </div>
+
+                <!-- Delivery Date -->
+                <div class="form-group">
+                    <label for="deliveryDate"><span class="label-icon">📅</span> Delivery Date</label>
+                    <div class="input-wrapper">
+                        <input type="date" id="deliveryDate" name="deliveryDate" required>
+                        <span class="input-icon"><i class="fas fa-calendar-alt"></i></span>
+                    </div>
+                    <p class="calc-note">You cannot select a past date</p>
+                </div>
+
+                <!-- Quantity & Price Row -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="quantity"><span class="label-icon">🍽️</span> Quantity (pieces)</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="quantity" name="quantity" min="1" value="1000" required>
+                            <span class="input-icon"><i class="fas fa-utensils"></i></span>
+                        </div>
+                        <p class="calc-note">Price: ₹2 per piece</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="price"><span class="label-icon">💰</span> Base Price (₹)</label>
+                        <div class="price-display" id="priceDisplay">
+                            <span class="price-icon"><i class="fas fa-calculator"></i></span>
+                            <span id="price">2000</span>
+                        </div>
+                        <input type="hidden" id="priceValue" name="price" value="2000">
+                    </div>
+                </div>
+
+                <!-- Dues (Now standalone, Advance Paid removed from UI) -->
+                <div class="form-group">
+                    <label for="dues"><span class="label-icon">📋</span> Remaining Dues (₹)</label>
+                    <div class="price-display highlight-orange" id="duesDisplay">
+                        <span class="price-icon"><i class="fas fa-clock"></i></span>
+                        <span id="dues">2000</span>
+                    </div>
+                    <input type="hidden" id="duesValue" name="dues" value="2000">
+                </div>
+
+                <!-- Total Price -->
+                <div class="form-group">
+                    <label for="totalPrice"><span class="label-icon">💳</span> Total Price (₹)</label>
+                    <div class="price-display highlight-gold" id="totalPriceDisplay">
+                        <span class="price-icon"><i class="fas fa-tag"></i></span>
+                        <span id="totalPrice">2000</span>
+                    </div>
+                    <input type="hidden" id="totalPriceValue" name="totalPrice" value="2000">
+                </div>
+
+                <!-- Discount Display -->
+                <div class="form-group">
+                    <label for="discount"><span class="label-icon">🏷️</span> Discount (₹)</label>
+                    <div class="price-display" id="discountDisplay" style="color:#4caf50;">
+                        <span class="price-icon"><i class="fas fa-percent"></i></span>
+                        <span id="discount">0</span>
+                    </div>
+                    <input type="hidden" id="discountValue" name="discount" value="0">
+                </div>
+
+                <!-- Coupon Code -->
+                <div class="form-group" id="coupon-group">
+                    <label for="couponCode"><span class="label-icon">🎟️</span> Coupon Code</label>
+                    <div class="coupon-row">
+                        <div class="input-wrapper" style="flex:2;">
+                            <input type="text" id="couponCode" name="couponCode" placeholder="Enter Coupon Code">
+                            <span class="input-icon"><i class="fas fa-ticket-alt"></i></span>
+                        </div>
+                        <button type="button" id="applyCouponBtn" class="btn small-btn">Apply</button>
+                    </div>
+                    <p class="calc-note" id="couponMessage"></p>
+                </div>
+
+                <!-- Submit -->
+                <button type="submit" class="btn btn-submit" id="submitBtn">
+                    <span id="btnText">🚀 Submit Order &amp; Download Invoice</span>
+                    <span id="btnLoading"></span>
+                </button>
+            </form>
+        </div>
+
+        <!-- Sidebar: Summary + Coupon Info -->
+        <div class="summary-sidebar">
+            <!-- Order Summary Card -->
+            <div class="glass-card summary-card reveal" id="summaryCard">
+                <div class="summary-title">📊 Order Summary</div>
+                <div class="summary-row">
+                    <span>Quantity</span>
+                    <span class="val" id="summaryQty">1000 pcs</span>
+                </div>
+                <div class="summary-row">
+                    <span>Base Price</span>
+                    <span class="val" id="summaryBase">₹2,000</span>
+                </div>
+                <div class="summary-row" id="summaryDiscountRow" style="display:none;">
+                    <span>Discount</span>
+                    <span class="val" style="color:#4caf50;" id="summaryDiscount">-₹0</span>
+                </div>
+                <!-- Advance Paid row removed from sidebar -->
+                <div class="summary-row highlight-row">
+                    <span>Remaining Dues</span>
+                    <span class="val" id="summaryDues">₹2,000</span>
+                </div>
+                <div class="summary-row" style="border-top:2px solid var(--border-subtle);margin-top:6px;padding-top:14px;">
+                    <span style="font-weight:700;font-size:0.95rem;">Total</span>
+                    <span class="val gold" style="font-size:1.1rem;" id="summaryTotal">₹2,000</span>
+                </div>
+                <div id="couponBadgeContainer" style="margin-top:10px;text-align:center;min-height:24px;"></div>
+            </div>
+    <!-- Success Modal -->
+    <div id="successModal" class="modal" role="dialog" aria-label="Order success confirmation" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-icon-check">✓</div>
+            <h3>✅ Order Submitted Successfully!</h3>
+            <p>Thank you for your order at <strong>Panipuri House</strong>. Your invoice has been downloaded. We'll contact you soon with delivery details.</p>
+            <p style="font-size:0.85rem;color:var(--gray-400);">Your order has been saved to our system.</p>
+            <button class="close-btn">OK — Close</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p>&copy; 2025 Panipuri House. All rights reserved.</p>
+    </footer>
+
+    <script>
+        (function() {
+            // ========== DOM ELEMENTS ==========
+            const orderForm = document.getElementById('orderForm');
+            const customerName = document.getElementById('customerName');
+            const phoneNumber = document.getElementById('phoneNumber');
+            const deliveryAddress = document.getElementById('deliveryAddress');
+            const deliveryDate = document.getElementById('deliveryDate');
+            const quantity = document.getElementById('quantity');
+            const priceSpan = document.getElementById('price');
+            const priceValue = document.getElementById('priceValue');
+            // advancePaid input removed from DOM
+            const duesSpan = document.getElementById('dues');
+            const duesValue = document.getElementById('duesValue');
+            const totalPriceSpan = document.getElementById('totalPrice');
+            const totalPriceValue = document.getElementById('totalPriceValue');
+            const discountSpan = document.getElementById('discount');
+            const discountValue = document.getElementById('discountValue');
+            const couponCode = document.getElementById('couponCode');
+            const applyCouponBtn = document.getElementById('applyCouponBtn');
+            const couponMessage = document.getElementById('couponMessage');
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnLoading = document.getElementById('btnLoading');
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+            const successModal = document.getElementById('successModal');
+            const closeBtn = document.querySelector('.close-btn');
+            const confettiCanvas = document.getElementById('confettiCanvas');
+
+            // Summary elements
+            const summaryQty = document.getElementById('summaryQty');
+            const summaryBase = document.getElementById('summaryBase');
+            const summaryDiscount = document.getElementById('summaryDiscount');
+            const summaryDiscountRow = document.getElementById('summaryDiscountRow');
+            // summaryAdvance removed
+            const summaryDues = document.getElementById('summaryDues');
+            const summaryTotal = document.getElementById('summaryTotal');
+            const couponBadgeContainer = document.getElementById('couponBadgeContainer');
+
+            // ========== STATE ==========
+            let currentDiscount = 0;
+            let lastAppliedCoupon = '';
+
+            // ========== SET MIN DATE ==========
+            const today = new Date().toISOString().split('T')[0];
+            deliveryDate.setAttribute('min', today);
+            deliveryDate.value = today;
+
+            // ========== FORMAT CURRENCY ==========
+            function formatINR(num) {
+                return '₹' + Number(num).toLocaleString('en-IN');
+            }
+
+            // ========== CALCULATE PRICE (advance always 0) ==========
+            function calculatePrice() {
+                const qty = parseInt(quantity.value) || 0;
+                const advPaid = 0; // advance paid always zero
+                const basePrice = qty * 2;
+
+                // Update base price
+                priceSpan.textContent = basePrice;
+                priceValue.value = basePrice;
+
+                // Apply discount
+                let discountedTotal = basePrice - currentDiscount;
+                if (discountedTotal < 0) discountedTotal = 0;
+
+                totalPriceSpan.textContent = discountedTotal;
+                totalPriceValue.value = discountedTotal;
+
+                // Dues = total - advance (always total)
+                let dues = discountedTotal - advPaid;
+                if (dues < 0) dues = 0;
+                duesSpan.textContent = dues;
+                duesValue.value = dues;
+
+                // Discount display
+                discountSpan.textContent = currentDiscount;
+                discountValue.value = currentDiscount;
+
+                // Update summary sidebar (no advance row)
+                updateSummarySidebar(qty, basePrice, dues, discountedTotal);
+            }
+
+            function updateSummarySidebar(qty, basePrice, dues, discountedTotal) {
+                summaryQty.textContent = qty + ' pcs';
+                summaryBase.textContent = formatINR(basePrice);
+                summaryDues.textContent = formatINR(dues);
+                summaryTotal.textContent = formatINR(discountedTotal);
+
+                if (currentDiscount > 0) {
+                    summaryDiscountRow.style.display = 'flex';
+                    summaryDiscount.textContent = '-₹' + currentDiscount;
+                } else {
+                    summaryDiscountRow.style.display = 'none';
+                    summaryDiscount.textContent = '-₹0';
+                }
+
+                // Coupon badge
+                if (currentDiscount > 0 && lastAppliedCoupon) {
+                    couponBadgeContainer.innerHTML =
+                        '<span class="summary-badge">🎟️ ' + lastAppliedCoupon + ' applied</span>';
+                } else if (lastAppliedCoupon && currentDiscount === 0) {
+                    couponBadgeContainer.innerHTML =
+                        '<span class="summary-badge error-badge">❌ Invalid coupon</span>';
+                } else {
+                    couponBadgeContainer.innerHTML = '';
+                }
+            }
+
+            // ========== APPLY COUPON ==========
+            function applyCoupon() {
+                const code = couponCode.value.trim().toUpperCase();
+                let discount = 0;
+                let message = '';
+                let msgColor = '';
+
+                if (code === 'PANIPURI100') {
+                    discount = 100;
+                    message = '✅ Coupon applied: ₹100 off';
+                    msgColor = '#4caf50';
+                } else if (code === 'PURI50') {
+                    discount = 50;
+                    message = '✅ Coupon applied: ₹50 off';
+                    msgColor = '#4caf50';
+                } else {
+                    discount = 0;
+                    message = '❌ Invalid coupon code.';
+                    msgColor = '#ff5252';
+                }
+
+                currentDiscount = discount;
+                lastAppliedCoupon = code;
+
+                couponMessage.textContent = message;
+                couponMessage.style.color = msgColor;
+
+                // Animate coupon message
+                couponMessage.style.transform = 'scale(1.04)';
+                setTimeout(() => { couponMessage.style.transform = 'scale(1)'; }, 200);
+
+                calculatePrice();
+
+                // Update discount display color
+                const discountDisplay = document.getElementById('discountDisplay');
+                if (discount > 0) {
+                    discountDisplay.style.color = '#4caf50';
+                    discountDisplay.style.borderColor = 'rgba(76,175,80,0.3)';
+                    discountDisplay.style.background = 'rgba(76,175,80,0.04)';
+                } else {
+                    discountDisplay.style.color = '';
+                    discountDisplay.style.borderColor = '';
+                    discountDisplay.style.background = '';
+                }
+            }
+
+            applyCouponBtn.addEventListener('click', applyCoupon);
+            couponCode.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    applyCoupon();
+                }
+            });
+
+            // ========== EVENT LISTENERS ==========
+            quantity.addEventListener('input', calculatePrice);
+            // No advancePaid listener needed
+
+            // ========== INVOICE ==========
+            function generateInvoiceText(formData, discountAmount, couponCodeStr) {
+                const line = '----------------------------------------\n';
+                let invoice = '           PANIPURI HOUSE INVOICE\n';
+                invoice += line;
+                invoice += `Order Date: ${new Date().toLocaleString()}\n`;
+                invoice += `Customer: ${formData.customerName}\n`;
+                invoice += `Phone: ${formData.phoneNumber}\n`;
+                invoice += `Delivery Address: ${formData.deliveryAddress}\n`;
+                invoice += `Delivery Date: ${formData.deliveryDate}\n`;
+                invoice += line;
+                invoice += `Quantity: ${formData.quantity} pcs × ₹2 = ₹${formData.price}\n`;
+                if (discountAmount > 0) {
+                    invoice += `Coupon (${couponCodeStr}): -₹${discountAmount}\n`;
+                }
+                invoice += `Total after discount: ₹${formData.totalPrice}\n`;
+                invoice += `Advance Paid: ₹0\n`;
+                invoice += `Dues: ₹${formData.dues}\n`;
+                invoice += line;
+                invoice += 'Thank you for ordering! 🍴\n';
+                invoice += 'Panipuri House - Taste the Joy!';
+                return invoice;
+            }
+
+            function downloadInvoice(content, filename) {
+                const blob = new Blob([content], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+
+            // ========== CONFETTI ==========
+            function launchConfetti() {
+                const ctx = confettiCanvas.getContext('2d');
+                confettiCanvas.width = window.innerWidth;
+                confettiCanvas.height = window.innerHeight;
+
+                const particles = [];
+                const colors = ['#ff6b00', '#ff8c00', '#c9a84c', '#d4b860', '#ff5722', '#4caf50', '#ffffff',
+                    '#ffcc80'
+                ];
+                const particleCount = 180;
+
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push({
+                        x: confettiCanvas.width / 2 + (Math.random() - 0.5) * 40,
+                        y: confettiCanvas.height / 2 - 30,
+                        vx: (Math.random() - 0.5) * 22,
+                        vy: (Math.random() - 0.5) * 20 - 8,
+                        size: Math.random() * 8 + 3,
+                        color: colors[Math.floor(Math.random() * colors.length)],
+                        rotation: Math.random() * 360,
+                        rotationSpeed: (Math.random() - 0.5) * 12,
+                        life: 1,
+                        decay: Math.random() * 0.015 + 0.008,
+                        gravity: 0.25,
+                        shape: Math.random() > 0.5 ? 'rect' : 'circle',
+                    });
+                }
+
+                function animateConfetti() {
+                    ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+                    let allDone = true;
+
+                    particles.forEach(p => {
+                        if (p.life <= 0) return;
+                        allDone = false;
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        p.vy += p.gravity;
+                        p.rotation += p.rotationSpeed;
+                        p.life -= p.decay;
+                        p.vx *= 0.995;
+                        p.vy *= 0.995;
+
+                        ctx.save();
+                        ctx.globalAlpha = Math.max(0, p.life);
+                        ctx.translate(p.x, p.y);
+                        ctx.rotate((p.rotation * Math.PI) / 180);
+                        ctx.fillStyle = p.color;
+                        if (p.shape === 'rect') {
+                            ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
+                        } else {
+                            ctx.beginPath();
+                            ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+                            ctx.fill();
+                        }
+                        ctx.restore();
+                    });
+
+                    if (!allDone) {
+                        requestAnimationFrame(animateConfetti);
+                    } else {
+                        ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+                    }
+                }
+
+                animateConfetti();
+
+                // Auto-clear canvas after 4 seconds
+                setTimeout(() => {
+                    ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+                }, 4000);
+            }
+
+            // ========== FORM SUBMISSION ==========
+            orderForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                // Hide messages
+                errorMessage.style.display = 'none';
+                successMessage.style.display = 'none';
+
+                // Gather data (advancePaid always 0)
+                const cName = customerName.value.trim();
+                const pNumber = phoneNumber.value.trim();
+                const dAddress = deliveryAddress.value.trim();
+                const dDate = deliveryDate.value;
+                const qty = quantity.value;
+                const price = priceValue.value;
+                const advPaid = 0; // explicitly zero
+                const dues = duesValue.value;
+                const totalPrice = totalPriceValue.value;
+                const discount = discountValue.value;
+                const cpCode = couponCode.value.trim().toUpperCase() || 'NONE';
+
+                const formData = {
+                    customerName: cName,
+                    phoneNumber: pNumber,
+                    deliveryAddress: dAddress,
+                    deliveryDate: dDate,
+                    quantity: qty,
+                    price: price,
+                    advancePaid: advPaid,
+                    dues: dues,
+                    totalPrice: totalPrice,
+                    discount: discount,
+                    couponCode: cpCode,
+                    timestamp: new Date().toLocaleString()
+                };
+
+                // Validate
+                if (!cName || !pNumber || !dAddress || !dDate) {
+                    showError('Please fill in all required fields.');
+                    return;
+                }
+                if (!/^\d{10}$/.test(pNumber)) {
+                    showError('Please enter a valid 10-digit phone number.');
+                    return;
+                }
+
+                // Generate & download invoice
+                const invoiceText = generateInvoiceText(formData, currentDiscount, cpCode);
+                downloadInvoice(invoiceText, 'Panipuri_Invoice_' + Date.now() + '.txt');
+
+                // Loading state
+                btnText.textContent = 'Submitting...';
+                btnLoading.style.display = 'inline-block';
+                submitBtn.disabled = true;
+
+                try {
+                    const scriptURL =
+                        'https://script.google.com/macros/s/AKfycbzXNOo8CntvstbLnSK3SlEFNZiT7RiNc_CRdFIsQdi7JGywJIYUF5WHnHHcEb0engWw/exec';
+                    const queryParams = new URLSearchParams(formData).toString();
+                    const fullURL = scriptURL + '?' + queryParams;
+
+                    await fetch(fullURL, {
+                        method: 'GET',
+                        mode: 'no-cors'
+                    });
+
+                    // Show success modal
+                    successModal.classList.add('active');
+                    successModal.setAttribute('aria-hidden', 'false');
+                    document.body.style.overflow = 'hidden';
+
+                    // Launch confetti
+                    launchConfetti();
+
+                    // Reset form
+                    orderForm.reset();
+                    quantity.value = 1000;
+                    couponCode.value = '';
+                    couponMessage.textContent = '';
+                    currentDiscount = 0;
+                    lastAppliedCoupon = '';
+                    document.getElementById('discountDisplay').style.color = '';
+                    document.getElementById('discountDisplay').style.borderColor = '';
+                    document.getElementById('discountDisplay').style.background = '';
+                    deliveryDate.value = today;
+                    calculatePrice();
+
+                } catch (error) {
+                    console.error('Error:', error);
+                    showError(
+                        'There was an error submitting your order. But your invoice is downloaded. Please contact us.'
+                        );
+                } finally {
+                    btnText.textContent = '🚀 Submit Order & Download Invoice';
+                    btnLoading.style.display = 'none';
+                    submitBtn.disabled = false;
+                }
+            });
+
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.style.display = 'block';
+                errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // Re-trigger shake animation
+                errorMessage.style.animation = 'none';
+                errorMessage.offsetHeight;
+                errorMessage.style.animation = 'shakeX 0.4s ease';
+            }
+
+            // ========== MODAL CLOSE ==========
+            function closeModal() {
+                successModal.classList.remove('active');
+                successModal.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+            }
+
+            closeBtn.addEventListener('click', closeModal);
+            window.addEventListener('click', function(event) {
+                if (event.target === successModal) {
+                    closeModal();
+                }
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && successModal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+
+            // ========== SCROLL REVEAL ==========
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+            // ========== INITIAL CALCULATION ==========
+            calculatePrice();
+
+            // ========== RESIZE HANDLER FOR CONFETTI CANVAS ==========
+            window.addEventListener('resize', function() {
+                if (confettiCanvas.width !== window.innerWidth || confettiCanvas.height !== window
+                    .innerHeight) {
+                    confettiCanvas.width = window.innerWidth;
+                    confettiCanvas.height = window.innerHeight;
+                }
+            });
+
+            console.log('%c🍴 Panipuri House %c— Premium Order Experience Ready',
+                'font-size:1.1rem;color:#ff6b00;font-weight:bold;',
+                'color:#c9a84c;');
+        })();
+    </script>
+</body>
+</html>
